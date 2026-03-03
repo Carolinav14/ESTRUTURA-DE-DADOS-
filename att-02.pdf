@@ -1,0 +1,62 @@
+1) Qual o valor de y no final do programa?
+Y= 4
+P=4
+X=4
+ 
+2) Diferença entre:
+• p++; é um pos-incremento ,ele passa a apontar para a próxima posição de memória, como p + p
+• (*p)++; incrementa o valor apontador por p ,como *p+*p.
+• *(++p); primeiro incrementa o ponteiro, depois acessa o valor apontado.
+(Sozinho não altera o valor armazenado.)
+ 
+b)  *(p+10)?
+//acessa o valor que está 10 posições após o endereço apontado por p.
+É equivalente a:
+p[10]
+ 
+3) Valores finais de x, y e p
+Y=5
+P=5
+X=4
+ 
+ 
+4) Erros nos códigos
+ 
+//O correto é inicializar com :
+Int main()
+//Além de inicializar as variáveis , tempo como int e int *i
+ 
+Int *temp; *temp = *i; // tempo não aponta para lugar nenhum , pois a variável não foi inicializada
+void troca (int *i, int *j);
+{ int temp; temp = *i; *i = *j; *j = temp; }
+ 
+ 
+p = x; // deveria ser p = &x;
+p é ponteiro e x é inteiro.
+ 
+if (a < b) // erro em comparar endereços e não conteúdo de strings
+#include <string.h> if (strcmp(a, b) < 0)
+ 
+5) Função troca para float
+void troca(float *a, float *b) { float temp; temp = *a; *a = *b; *b = temp; }
+ 
+ 
+#include <stdio.h>
+ 
+void troca (int *i, int *j) {
+    int temp;
+    temp = *i;
+    *i = *j;
+    *j = temp;
+}
+ 
+int main() {
+    int a = 4, b = 9;
+ 
+    troca(&a, &b);
+ 
+    printf("a = %d\n", a);
+    printf("b = %d\n", b);
+ 
+    return 0;
+}
