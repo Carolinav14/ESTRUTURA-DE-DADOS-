@@ -1,0 +1,82 @@
+1. O que é um Tipo Abstrato de Dados (TAD) e qual a característica fundamental na sua utilização?
+
+Um Tipo Abstrato de Dados (TAD) é um modelo que define um conjunto de dados e as operações que podem ser realizadas
+sobre esses dados, sem especificar como esses dados são implementados internamente. A característica fundamental de 
+um TAD é o encapsulamento (ou abstração), que permite esconder os detalhes da implementação interna. Dessa forma, o 
+usuário do TAD sabe quais operações pode realizar, mas não precisa saber como elas são implementadas.
+
+2. Quais as vantagens de se programar com TADs?
+Encapsulamento: esconde os detalhes internos da implementação;
+Reutilização de código: o mesmo TAD pode ser usado em diferentes programas;
+Modularidade: o programa pode ser dividido em partes menores e independentes;
+Facilidade de manutenção: alterações na implementação não afetam quem utiliza o TAD;
+Melhor organização do código.
+
+3. Crie um TAD que implemente o controle de uma conta bancária, implemente funções para inicializar, depósito, sacar e imprimir o saldo.
+
+
+typedef struct {
+int numero;
+float saldo;
+} Conta;
+
+void inicializarConta(Conta *c, int numero) {
+c->numero = numero;
+c->saldo = 0.0;
+}
+
+void depositar(Conta *c, float valor) {
+if (valor > 0) {
+c->saldo += valor;
+}
+}
+
+void sacar(Conta *c, float valor) {
+if (valor > 0 && valor <= c->saldo) {
+c->saldo -= valor;
+} else {
+printf("Saldo insuficiente\n");
+}
+}
+
+void imprimirSaldo(Conta *c) {
+printf("Conta: %d\n", c->numero);
+printf("Saldo: %.2f\n", c->saldo);
+}
+
+
+
+4. Utilizando a alocação dinâmica de memória crie uma função para criar uma nova conta bancária.
+
+Conta* criarConta(int numero) {
+Conta *c;
+
+c = (Conta*) malloc(sizeof(Conta));
+
+if (c != NULL) {
+    c->numero = numero;
+    c->saldo = 0.0;
+}
+
+return c;
+
+}
+
+Exemplo de uso:
+
+int main() {
+
+Conta *c1;
+
+c1 = criarConta(123);
+
+depositar(c1, 500);
+sacar(c1, 200);
+imprimirSaldo(c1);
+
+free(c1);
+
+return 0;
+
+
+}
