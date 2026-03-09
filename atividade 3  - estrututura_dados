@@ -13,61 +13,99 @@ Facilidade de manutenção: alterações na implementação não afetam quem uti
 Melhor organização do código.
 
 3. Crie um TAD que implemente o controle de uma conta bancária, implemente funções para inicializar, depósito, sacar e imprimir o saldo.
-
+#include <stdio.h>
 
 typedef struct {
-int numero;
-float saldo;
+    int numero;
+    float saldo;
 } Conta;
 
+//FUNCÃO PARA INICIALIZAR O PROGRAMA /CONTA BANCÁRIA
 void inicializarConta(Conta *c, int numero) {
-c->numero = numero;
-c->saldo = 0.0;
+    c->numero = numero;
+    c->saldo = 0.0;
 }
 
+// FUNÇÃO PARA DEPÓSITO
 void depositar(Conta *c, float valor) {
-if (valor > 0) {
-c->saldo += valor;
-}
+    if (valor > 0) {
+        c->saldo += valor;
+    }
 }
 
+//FUNÇÃO PARA SAQUE
 void sacar(Conta *c, float valor) {
-if (valor > 0 && valor <= c->saldo) {
-c->saldo -= valor;
-} else {
-printf("Saldo insuficiente\n");
-}
+    if (valor > 0 && valor <= c->saldo) {
+        c->saldo -= valor;
+    } else {
+        printf("Saldo insuficiente\n");
+    }
 }
 
+//IMPRIME O SALDO
 void imprimirSaldo(Conta *c) {
-printf("Conta: %d\n", c->numero);
-printf("Saldo: %.2f\n", c->saldo);
+    printf("Conta: %d\n", c->numero);
+    printf("Saldo: %.2f\n", c->saldo);
 }
+
+int main() {
+
+    Conta conta1;
+
+    inicializarConta(&conta1, 101);
+
+    depositar(&conta1, 500);
+    sacar(&conta1, 200);
+
+    imprimirSaldo(&conta1);
+
+    return 0;
+}
+
+
+LINK ONLINE GDB;
+https://onlinegdb.com/lGx2JC9vd
 
 
 
 4. Utilizando a alocação dinâmica de memória crie uma função para criar uma nova conta bancária.
 
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct {
+    int numero;
+    float saldo;
+} Conta;
+
+// função para criar uma nova conta usando alocação dinâmica
 Conta* criarConta(int numero) {
-Conta *c;
 
-c = (Conta*) malloc(sizeof(Conta));
+    Conta *c;
 
-if (c != NULL) {
-    c->numero = numero;
-    c->saldo = 0.0;
+    c = (Conta*) malloc(sizeof(Conta));
+
+    if (c != NULL) {
+        c->numero = numero;
+        c->saldo = 0.0;
+    }
+
+    return c;
 }
-
-return c;
-
-}
-
-Exemplo de uso:
 
 int main() {
 
-Conta *c1;
+    Conta *conta1;
 
+    conta1 = criarConta(200);
+
+    printf("Conta criada: %d\n", conta1->numero);
+    printf("Saldo inicial: %.2f\n", conta1->saldo);
+
+    free(conta1);
+
+    return 0;
+}
 c1 = criarConta(123);
 
 depositar(c1, 500);
@@ -80,3 +118,5 @@ return 0;
 
 
 }
+LINK ONLINE GDB:
+https://onlinegdb.com/t9oIXoLtO
